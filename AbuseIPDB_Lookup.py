@@ -43,6 +43,7 @@ def ApiKey():
     with open(apikeyfile, 'w') as f:
         f.writelines(apikey)
     print("API KEY written to " + apikeyfile)
+    MainMenu()
 
 
 
