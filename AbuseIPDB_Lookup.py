@@ -13,24 +13,25 @@ except ModuleNotFoundError:
 
 apikey = input("Enter your AbuseIPDB API Key: ")
 
-url = "https://api.abuseipdb.com/api/v2/check"
 
-IPAddr = input("Enter IP Address to check: ")
 
-querystring = {
+def MainMenu():
+    print("AbuseIPDB Lookup Script")
+    url = "https://api.abuseipdb.com/api/v2/check"
+
+    IPAddr = input("Enter IP Address to check: ")
+
+    querystring = {
     'ipAddress' : IPAddr,
     }
 
-headers = {
+    headers = {
     'Accept': 'application/json',
     'key' : apikey
     }
 
-response = requests.request(method='GET', url=url, headers=headers, params=querystring)
+    response = requests.request(method='GET', url=url, headers=headers, params=querystring)
 
-print (response.text)
-
-def MainMenu():
-    print("AbuseIPDB Lookup Script")
+    print (response.text)
 
 MainMenu()
