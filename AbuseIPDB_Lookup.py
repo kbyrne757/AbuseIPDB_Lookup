@@ -82,7 +82,7 @@ def MainMenu():
 def userOptions(options):
 
     if (options == "1"):
-        ApeKey()
+        ApiKey()
     elif (options == "2"):
         AbuseLookup()
     elif (options == "3"):
