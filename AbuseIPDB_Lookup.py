@@ -4,6 +4,7 @@ import os
 import getpass
 import subprocess as sp
 import sys
+from time import sleep
 try:
     import requests
 except ModuleNotFoundError:
