@@ -3,6 +3,7 @@ import json
 import os
 import getpass
 import subprocess as sp
+import sys
 try:
     import requests
 except ModuleNotFoundError:
