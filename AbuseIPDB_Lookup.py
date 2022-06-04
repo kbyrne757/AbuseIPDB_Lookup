@@ -1,4 +1,5 @@
 #Python V 3.10.0
+import json
 try:
     import requests
 except ModuleNotFoundError:
@@ -32,6 +33,7 @@ def MainMenu():
 
     response = requests.request(method='GET', url=url, headers=headers, params=querystring)
 
-    print (response.text)
+    decodedResponse = json.loads(response.text)
+    print (json.dumps(decodedResponse, sort_keys=True, indent=4))
 
 MainMenu()
