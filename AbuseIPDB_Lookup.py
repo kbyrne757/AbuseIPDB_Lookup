@@ -69,8 +69,11 @@ def AbuseLookup():
 
     decodedResponse = json.loads(response.text)
     print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+    MainMenu()
 
     
+def clearScreen():
+    os.system('cls')
 
 
 def MainMenu():
