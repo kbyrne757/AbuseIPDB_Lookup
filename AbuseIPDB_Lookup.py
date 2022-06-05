@@ -74,8 +74,21 @@ def AbuseLookup():
     
 def clearScreen():
     os.system('cls')
+
+def ClearMenu():
+    clearScreen()
     MainMenu()
 
+
+def Exit():
+    Question = input("Are you sure you want to exit? \n")
+    Question = Question.upper()
+    if (Question == "Y" ) or (Question == "YES"):
+        clearScreen()
+        quit()
+    
+#else:
+        #MainMenu()
 
 def MainMenu():
     print("\nMain Menu     Available Options shown below\n")
@@ -96,8 +109,8 @@ def userOptions(options):
     elif (options == "3"):
         clearScreen()
     elif (options == "4"):
-        print(test)
+        MainMenu()
     elif (options == "0"):
-        print(test) 
+        Exit()
 
 main()
