@@ -129,8 +129,8 @@ def ReportIP(option):
         category = 2
 
     params = {
-    'ip':IPAddr,
-    'categories':category,
+    'ip': IPAddr,
+    'categories': category,
     }
 
     headers = {
