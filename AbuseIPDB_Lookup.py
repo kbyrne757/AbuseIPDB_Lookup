@@ -74,6 +74,7 @@ def AbuseLookup():
     
 def clearScreen():
     os.system('cls')
+    MainMenu()
 
 
 def MainMenu():
@@ -93,7 +94,7 @@ def userOptions(options):
     elif (options == "2"):
         AbuseLookup()
     elif (options == "3"):
-        print(test)
+        clearScreen()
     elif (options == "4"):
         print(test)
     elif (options == "0"):
