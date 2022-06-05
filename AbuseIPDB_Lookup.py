@@ -86,9 +86,8 @@ def Exit():
     if (Question == "Y" ) or (Question == "YES"):
         clearScreen()
         quit()
-    
-#else:
-        #MainMenu()
+    else:
+        MainMenu()
 
 def MainMenu():
     print("\nMain Menu     Available Options shown below\n")
