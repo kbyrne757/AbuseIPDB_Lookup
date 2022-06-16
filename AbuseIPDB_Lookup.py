@@ -115,9 +115,9 @@ def MainMenu():
 def ReportCategories():
     print("OPTION 1: DNS Compromise      Altering DNS records resulting in improper redirection \n")
     print("OPTION 2: DNS Poisoining      Falsifying domain server cache (cache poisoning) \n")
-    print("OPTION 3: Clear Screen\n")
-    print("OPTION 4: Home Menu  \n")
-    print("OPTION 0: Quit the program\n")
+    print("OPTION 3: Fraud Orders        Fraudulent orders \n")
+    print("OPTION 4: DDoS Attack         Participating in distributed denial-of-service (usually part of botnet) \n")
+    print("OPTION 5: Hacking \n")
     ReportIP(input())
 
 def ReportIP(option):
@@ -133,21 +133,59 @@ def ReportIP(option):
         category = 1
     elif (option == "2"):
         category = 2
+    elif (option == "3"):
+        category = 3
+    elif (option == "4"):
+        category = 4
+    elif (option == "5"):
+        category = 15
 
-    params = {
-    'ip': IPAddr,
-    'categories': category,
-    }
+    commentquery = input("Would you like to add a comment? (Y/N) \n")
+    commentquery = commentquery.upper()
+    if (commentquery == "Y" ) or (commentquery == "YES"):
+        ReportIpComment = input("Enter Comment: ")
+        params = {
+            'ip': IPAddr,
+            'categories': category,
+            'comment': ReportIpComment
+                }
 
-    headers = {
-    'Accept': 'application/json',
-    'Key': APIKEY
-    }
+        headers = {
+            'Accept': 'application/json',
+            'Key': APIKEY
+                }
 
-    response = requests.request(method='POST', url=url, headers=headers, params=params)
+        response = requests.request(method='POST', url=url, headers=headers, params=params)
     
-    decodedResponse = json.loads(response.text)
-    print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+        decodedResponse = json.loads(response.text)
+        print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+        MainMenu()
+        
+    if (commentquery == "N") or (commentquery == "No"):
+        print("No comment added, proceeding......")
+        params = {
+            'ip': IPAddr,
+            'categories': category,
+                }
+
+        headers = {
+            'Accept': 'application/json',
+            'Key': APIKEY
+                }
+
+        response = requests.request(method='POST', url=url, headers=headers, params=params)
+    
+        decodedResponse = json.loads(response.text)
+        print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+        MainMenu()
+
+    else:
+        print("Invalid Input returning to start.... \n")
+        ReportCategories()
+        
+    
+
+    
 
 
     
