@@ -57,7 +57,7 @@ def ApiKey():
 def AbuseLookup():
     print("AbuseIPDB Lookup Script")
     url = "https://api.abuseipdb.com/api/v2/check"
-
+    days = '180'
     IPAddr = input("Enter IP Address to check: ")
 
     with open(apikeyfile) as f:
@@ -74,8 +74,14 @@ def AbuseLookup():
 
     response = requests.request(method='GET', url=url, headers=headers, params=querystring)
 
-    decodedResponse = json.loads(response.text)
-    print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+    if response.status_code == 200:
+            decodedResponse = json.loads(response.text)
+
+            print("   IP:          " + str(decodedResponse['data']['ipAddress']))
+            print("   Reports:     " + str(decodedResponse['data']['totalReports']))
+            print("   Abuse Score: " + str(decodedResponse['data']['abuseConfidenceScore']) + "%")
+            print("   Last Report: " + str(decodedResponse['data']['lastReportedAt']))
+            print (json.dumps(decodedResponse, sort_keys=True, indent=4))
     MainMenu()
 
     
