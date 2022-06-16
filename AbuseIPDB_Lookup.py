@@ -82,6 +82,9 @@ def AbuseLookup():
             print("   Abuse Score: " + str(decodedResponse['data']['abuseConfidenceScore']) + "%")
             print("   Last Report: " + str(decodedResponse['data']['lastReportedAt']))
             print (json.dumps(decodedResponse, sort_keys=True, indent=4))
+    #else:
+     #   print("Unable to connect to Abuseipdb, check connection and try again. /n Exiting to MainMenu")
+      #  MainMenu()
     MainMenu()
 
     
@@ -107,8 +110,8 @@ def MainMenu():
     print("OPTION 1: Add API Key\n")
     print("OPTION 2: IP Lookup \n")
     print("OPTION 3: Report IP \n")
-    print("OPTION 3: Clear Screen\n")
-    print("OPTION 4: Home Menu  \n")
+    print("OPTION 4: Clear Screen\n")
+    print("OPTION 5: Home Menu  \n")
     print("OPTION 0: Quit the program\n")
     userOptions(input())
 
@@ -117,11 +120,35 @@ def ReportCategories():
     print("OPTION 2: DNS Poisoining      Falsifying domain server cache (cache poisoning) \n")
     print("OPTION 3: Fraud Orders        Fraudulent orders \n")
     print("OPTION 4: DDoS Attack         Participating in distributed denial-of-service (usually part of botnet) \n")
-    print("OPTION 5: Hacking \n")
+    print("OPTION 5: FTP Brute-Force \n")
+    print("OPTION 6: Ping of Death       Oversized IP packet \n")
+    print("OPTION 7: Phishing            Phishing websites and/or email  \n")
+    print("OPTION 8: Fraud VoIP \n")
+    print("OPTION 9: Open Proxy          Open proxy, open relay, or Tor exit node \n")
+    print("OPTION 10: Web Spam           Comment/forum spam, HTTP referer spam, or other CMS spam \n")
+    print("OPTION 11: Email Spam         Spam email content, infected attachments, and phishing emails. Note: Limit comments to only relevent information (instead of log dumps) and be sure to remove PII if you want to remain anonymous.  \n")
+    print("OPTION 12: Blog Spam          CMS blog comment spam  \n")
+    print("OPTION 13: VPN IP             Conjunctive category   \n")
+    print("OPTION 14: Port Scan          Scanning for open ports and vulnerable services   \n")
+    print("OPTION 15: Hacking \n")
+    print("OPTION 16: SQL Injection      Attempts at SQL injection   \n")
+    print("OPTION 17: Spoofing           Email sender spoofing    \n")
+    print("OPTION 18: Brute-Force        Credential brute-force attacks on webpage logins and services like SSH, FTP, SIP, SMTP, RDP, etc. This category is seperate from DDoS attacks.     \n")
+    print("OPTION 19: Bad Web Bot        Webpage scraping (for email addresses, content, etc) and crawlers that do not honor robots.txt. Excessive requests and user agent spoofing can also be reported here.    \n")
+    print("OPTION 20: Exploited Host     Host is likely infected with malware and being used for other attacks or to host malicious content. The host owner may not be aware of the compromise. This category is often used in combination with other attack categories.     \n")
+    print("OPTION 21: Web App Attack     Attempts to probe for or exploit installed web applications such as a CMS like WordPress/Drupal, e-commerce solutions, forum software, phpMyAdmin and various other software plugins/solutions.     \n")
+    print("OPTION 22: SSH                Secure Shell (SSH) abuse. Use this category in combination with more specific categories    \n")
+    print("OPTION 23: IoT Targeted        Abuse was targeted at an 'Internet of Things' type device. Include information about what type of device was targeted in the comments    \n")
+    print("OPTION 0: Main Menu \n")
     ReportIP(input())
 
 def ReportIP(option):
     category = 0
+    category = option
+    print(category)
+    if (category == '0'):
+        MainMenu()
+        
     url = "https://api.abuseipdb.com/api/v2/report"
 
     with open(apikeyfile) as f:
@@ -129,17 +156,6 @@ def ReportIP(option):
     
     IPAddr = input("Enter IP Address to Report: ")
     
-    if (option == "1"):
-        category = 1
-    elif (option == "2"):
-        category = 2
-    elif (option == "3"):
-        category = 3
-    elif (option == "4"):
-        category = 4
-    elif (option == "5"):
-        category = 15
-
     commentquery = input("Would you like to add a comment? (Y/N) \n")
     commentquery = commentquery.upper()
     if (commentquery == "Y" ) or (commentquery == "YES"):
@@ -197,9 +213,9 @@ def userOptions(options):
         AbuseLookup()
     elif (options == "3"):
         ReportCategories()
-    elif (options == "3"):
-        clearScreen()
     elif (options == "4"):
+        ClearMenu()
+    elif (options == "5"):
         MainMenu()
     elif (options == "0"):
         Exit()
