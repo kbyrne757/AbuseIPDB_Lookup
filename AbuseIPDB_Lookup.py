@@ -110,8 +110,9 @@ def MainMenu():
     print("OPTION 1: Add API Key\n")
     print("OPTION 2: IP Lookup \n")
     print("OPTION 3: Report IP \n")
-    print("OPTION 4: Clear Screen\n")
-    print("OPTION 5: Home Menu  \n")
+    print("OPTION 4: Remove Reported IP \n")
+    print("OPTION 5: Clear Screen\n")
+    print("OPTION 6: Home Menu  \n")
     print("OPTION 0: Quit the program\n")
     userOptions(input())
 
@@ -199,10 +200,25 @@ def ReportIP(option):
         print("Invalid Input returning to start.... \n")
         ReportCategories()
         
+def ClearAddress():
     
+    IPaddressrem = input("Enter IP Address you would like to remove from reported IP: \n")
+    with open(apikeyfile) as f:
+        APIKEY = f.read()
+    url = 'https://api.abuseipdb.com/api/v2/clear-address'
+    querystring = {
+            'ipAddress': IPaddressrem,
+                  }
 
-    
+    headers = {
+            'Accept': 'application/json',
+            'Key': APIKEY
+            }
 
+    response = requests.request(method='DELETE', url=url, headers=headers, params=querystring)
+    decodedResponse = json.loads(response.text)
+    print(json.dumps(decodedResponse, sort_keys=True, indent=4))
+    MainMenu()
 
     
 def userOptions(options):
@@ -214,8 +230,10 @@ def userOptions(options):
     elif (options == "3"):
         ReportCategories()
     elif (options == "4"):
-        ClearMenu()
+        ClearAddress()
     elif (options == "5"):
+        ClearMenu()
+    elif (options == "6"):
         MainMenu()
     elif (options == "0"):
         Exit()
