@@ -5,6 +5,8 @@ import getpass
 import subprocess as sp
 import sys
 from time import sleep
+
+#Tries to import request, if not installed attempts to install via pip
 try:
     import requests
 except ModuleNotFoundError:
@@ -16,6 +18,8 @@ except ModuleNotFoundError:
     import requests
     print("Import Succesful")
 
+
+#Tries to import art, if not installed attempts to install via pip
 try:
     from art import *
 except ModuleNotFoundError:
@@ -34,16 +38,19 @@ def getUser():
     username = getpass.getuser()
     return username
 
-
+#Setting api key file location
 apikeyfile = ("C:\\Users\\" + getUser() + "\\Documents\\abuseipdblookupapikey.txt")
     
 
 
 
-
+#Function responsible for Main Menu Art
 def main():
     tprint("IP Lookup",font="block",chr_ignore=True)
     MainMenu()
+
+
+#function responsible for Writing New API Key to file    
 def ApiKey():
     apikey = input("Enter your AbuseIPDB API Key: ")
     
@@ -82,17 +89,10 @@ def AbuseLookup():
             print("   Abuse Score: " + str(decodedResponse['data']['abuseConfidenceScore']) + "%")
             print("   Last Report: " + str(decodedResponse['data']['lastReportedAt']))
             print (json.dumps(decodedResponse, sort_keys=True, indent=4))
-    #else:
-     #   print("Unable to connect to Abuseipdb, check connection and try again. /n Exiting to MainMenu")
-      #  MainMenu()
     MainMenu()
 
-    
-def clearScreen():
-    os.system('cls')
-
 def ClearMenu():
-    clearScreen()
+    os.system('cls')
     MainMenu()
 
 
@@ -100,7 +100,7 @@ def Exit():
     Question = input("Are you sure you want to exit? \n")
     Question = Question.upper()
     if (Question == "Y" ) or (Question == "YES"):
-        clearScreen()
+        os.system('cls')
         quit()
     else:
         MainMenu()
