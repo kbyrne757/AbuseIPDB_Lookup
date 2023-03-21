@@ -31,15 +31,8 @@ except ModuleNotFoundError:
     from art import *
     print("Import Succesful")
 
-
-
-#function to acquire username for directory listing
-def getUser():
-    username = getpass.getuser()
-    return username
-
-#Setting api key file location
-apikeyfile = ("C:\\Users\\" + getUser() + "\\Documents\\abuseipdblookupapikey.txt")
+#Reading Apikey from environment variables
+getapikey = os.environ.get("Abuse_APIKEY")
 
 
 
@@ -49,15 +42,6 @@ def main():
     MainMenu()
 
 
-#function responsible for Writing New API Key to file    
-def ApiKey():
-    apikey = input("Enter your AbuseIPDB API Key: ")
-    
-    with open(apikeyfile, 'w') as f:
-        f.writelines(apikey)
-    print("API KEY written to " + apikeyfile)
-    MainMenu()
-
 
 
 def AbuseLookup():
@@ -66,8 +50,6 @@ def AbuseLookup():
     days = '180'
     IPAddr = input("Enter IP Address to check: ")
 
-    with open(apikeyfile) as f:
-        APIKEY = f.read()
 
     querystring = {
     'ipAddress' : IPAddr,
@@ -75,7 +57,7 @@ def AbuseLookup():
 
     headers = {
     'Accept': 'application/json',
-    'key' : APIKEY
+    'key' : getapikey
     }
 
     response = requests.request(method='GET', url=url, headers=headers, params=querystring)
@@ -152,8 +134,6 @@ def ReportIP():
     values = ', '.join(str(v) for v in category)
     url = "https://api.abuseipdb.com/api/v2/report"
 
-    with open(apikeyfile) as f:
-        APIKEY = f.read()
     
     IPAddr = input("Enter IP Address to Report: ")
     
@@ -169,7 +149,7 @@ def ReportIP():
 
         headers = {
             'Accept': 'application/json',
-            'Key': APIKEY
+            'Key': getapikey
                 }
 
         response = requests.request(method='POST', url=url, headers=headers, params=params)
@@ -187,7 +167,7 @@ def ReportIP():
 
         headers = {
             'Accept': 'application/json',
-            'Key': APIKEY
+            'Key': getapikey
                 }
 
         response = requests.request(method='POST', url=url, headers=headers, params=params)
@@ -203,8 +183,7 @@ def ReportIP():
 def ClearAddress():
     
     IPaddressrem = input("Enter IP Address you would like to remove from reported IP: \n")
-    with open(apikeyfile) as f:
-        APIKEY = f.read()
+
     url = 'https://api.abuseipdb.com/api/v2/clear-address'
     querystring = {
             'ipAddress': IPaddressrem,
@@ -212,7 +191,7 @@ def ClearAddress():
 
     headers = {
             'Accept': 'application/json',
-            'Key': APIKEY
+            'Key': getapikey
             }
 
     response = requests.request(method='DELETE', url=url, headers=headers, params=querystring)
@@ -224,16 +203,14 @@ def ClearAddress():
 def userOptions(options):
 
     if (options == "1"):
-        ApiKey()
-    elif (options == "2"):
         AbuseLookup()
-    elif (options == "3"):
+    elif (options == "2"):
         ReportIP()
-    elif (options == "4"):
+    elif (options == "3"):
         ClearAddress()
-    elif (options == "5"):
+    elif (options == "4"):
         ClearMenu()
-    elif (options == "6"):
+    elif (options == "5"):
         MainMenu()
     elif (options == "0"):
         Exit()
