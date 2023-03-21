@@ -88,12 +88,11 @@ def Exit():
 
 def MainMenu():
     print("\nMain Menu     Available Options shown below\n")
-    print("OPTION 1: Add API Key\n")
-    print("OPTION 2: IP Lookup \n")
-    print("OPTION 3: Report IP \n")
-    print("OPTION 4: Remove Reported IP \n")
-    print("OPTION 5: Clear Screen\n")
-    print("OPTION 6: Home Menu  \n")
+    print("OPTION 1: IP Lookup \n")
+    print("OPTION 2: Report IP \n")
+    print("OPTION 3: Remove Reported IP \n")
+    print("OPTION 4: Clear Screen\n")
+    print("OPTION 5: Home Menu  \n")
     print("OPTION 0: Quit the program\n")
     userOptions(input())
 
